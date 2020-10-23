@@ -50,6 +50,26 @@ public class GameDAO {
 		}
 	}
 	
+	public void batchInsert(List<Game> games) {
+		//you want to get the prepared statement
+		Connection connection = connectionPool.getConnection();
+		try(PreparedStatement statement = connection.prepareStatement(INSERT_GAME_SQL);) {
+			connection.setAutoCommit(false);
+			//note that this for statement also works with Lists aswell as normal arrays i suppose
+			for(Game game : games) {
+				statement.setInt(1, game.getId());
+				statement.setString(2, game.getName());
+				statement.addBatch();
+			}
+			statement.executeBatch();
+			connection.commit();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		connectionPool.releaseConnection(connection);
+	}
+	
 	public List<Game> selectAll() {
 		List<Game> arrayListGames = new ArrayList<Game>(); 
 		Connection connection = connectionPool.getConnection();
