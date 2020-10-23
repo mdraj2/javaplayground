@@ -1,6 +1,7 @@
 package com.fdm.jdbc.simple;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +14,8 @@ public class GameDAO {
 	// the url is anywhere you want it to be
 	private static final String CREATE_SQL = "CREATE TABLE GAMES (id INTEGER(5) PRIMARY KEY, name VARCHAR(50))";
 	//private static final String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (1, 'Animal Crossing')";
-
+	private static final String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (?,?)";
+	
 	public GameDAO(ConnectionPool connectionPool) {
 		super();
 		this.connectionPool = connectionPool;
@@ -38,10 +40,10 @@ public class GameDAO {
 	public void insert(Game game) {
 		Connection connection = connectionPool.getConnection();
 		//try with resouces example
-		try(Statement statement = connection.createStatement();) {
-			String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (" + game.getId() + ", '" + game.getName() +"')";
-			int result = statement.executeUpdate(INSERT_GAME_SQL);
-			System.out.println(result);
+		try(PreparedStatement statement = connection.prepareStatement(INSERT_GAME_SQL);) {
+			statement.setInt(1, game.getId());
+			statement.setString(2, game.getName());
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

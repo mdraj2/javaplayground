@@ -12,7 +12,12 @@ public class DatabaseApp {
 	public static void main(String[] args) {
 		ConnectionPool connectionPool = new ConnectionPool();
 		GameDAO gameDAO = new GameDAO(connectionPool);
+		//Game newGame = new Game(5,"batman");
+		//gameDAO.insert(newGame);
 		List<Game> newList = gameDAO.selectAll();
+		newList.forEach(x -> {
+			System.out.println(x.getName());
+		});
 	}
 
 }
