@@ -11,10 +11,11 @@ import java.util.List;
 public class GameDAO {
 	
 	private ConnectionPool connectionPool;
-	// the url is anywhere you want it to be
-	private static final String CREATE_SQL = "CREATE TABLE GAMES (id INTEGER(5) PRIMARY KEY, name VARCHAR(50))";
+	// the url is anywhere you want it to be.
+	// i made them default so that i can test the methods.
+	static final String CREATE_SQL = "CREATE TABLE GAMES (id INTEGER(5) PRIMARY KEY, name VARCHAR(50))";
 	//private static final String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (1, 'Animal Crossing')";
-	private static final String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (?,?)";
+	static final String INSERT_GAME_SQL ="INSERT INTO GAMES (id, name) VALUES (?,?)";
 	
 	public GameDAO(ConnectionPool connectionPool) {
 		super();
@@ -44,6 +45,7 @@ public class GameDAO {
 			statement.setInt(1, game.getId());
 			statement.setString(2, game.getName());
 			statement.executeUpdate();
+			connectionPool.releaseConnection(connection);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
