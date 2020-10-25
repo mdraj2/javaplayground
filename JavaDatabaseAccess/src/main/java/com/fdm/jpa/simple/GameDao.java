@@ -33,4 +33,12 @@ public class GameDao {
 		//emf.close();
 	}
 	
+	public Game findById(int id) {
+		
+		//get the entityManager
+		EntityManager em = emf.createEntityManager();
+		Game game = em.find(Game.class, id);
+		return game;
+	}
+	
 }

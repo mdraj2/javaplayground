@@ -13,6 +13,8 @@ public class DatabaseApp {
 		GameDao gameDao = new GameDao(emf);
 		Game game = new Game(1, "Animal Crossing");
 		gameDao.persist(game);
+		//this is a managed game
+		Game foundGame = gameDao.findById(1);
 		//we will close the emf here
 		emf.close();
 		
