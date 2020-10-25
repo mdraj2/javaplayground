@@ -38,6 +38,7 @@ public class GameDao {
 		//get the entityManager
 		EntityManager em = emf.createEntityManager();
 		Game game = em.find(Game.class, id);
+		em.close();
 		return game;
 	}
 	
