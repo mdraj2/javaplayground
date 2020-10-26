@@ -56,4 +56,15 @@ public class GameDao {
 		em.close();
 	}
 	
+	public void update(Game game) {
+		EntityManager em = emf.createEntityManager();
+		Game foundGame = em.find(Game.class, game.getId());
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		{
+			foundGame.setName(game.getName());			
+		}
+		et.commit();
+		em.close();
+	}
 }
