@@ -42,4 +42,18 @@ public class GameDao {
 		return game;
 	}
 	
+	public void deleteById(int id) {
+		//you need an entity manager
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		//get a managed game. note you do not need et for this
+		Game foundGame = em.find(Game.class, id);
+		et.begin();
+		{	//note that this method needs to be a managed game
+			em.remove(foundGame);
+		}
+		et.commit();
+		em.close();
+	}
+	
 }

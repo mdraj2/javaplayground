@@ -14,8 +14,13 @@ public class DatabaseApp {
 		Game game = new Game(1, "Animal Crossing");
 		gameDao.persist(game);
 		//this is a managed game
+		gameDao.deleteById(1);
 		Game foundGame = gameDao.findById(1);
 		//we will close the emf here
+		//lets try deleting it now
+		//will throw null pointer because game was deleted
+		System.out.println(foundGame.toString());
+		
 		emf.close();
 		
 	}
