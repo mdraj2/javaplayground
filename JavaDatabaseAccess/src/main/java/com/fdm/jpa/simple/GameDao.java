@@ -1,9 +1,12 @@
 package com.fdm.jpa.simple;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class GameDao {
 	//create a new game
@@ -79,5 +82,17 @@ public class GameDao {
 		et.commit();
 		em.close();
 		return managedGame;
+	}
+	
+	public List<Game> findAll(){
+		//start with the JPQL queru
+		
+		EntityManager em = emf.createEntityManager();
+		String queryString = "SELECT g FROM Game g";
+		TypedQuery<Game> query = em.createQuery(queryString, Game.class);
+		List<Game> foundGame = query.getResultList();
+		em.close();
+		return foundGame;
+		
 	}
 }

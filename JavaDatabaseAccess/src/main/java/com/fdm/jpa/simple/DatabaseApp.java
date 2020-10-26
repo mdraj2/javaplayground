@@ -1,5 +1,7 @@
 package com.fdm.jpa.simple;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -11,9 +13,15 @@ public class DatabaseApp {
 		//this refers to the name of the persistence-unit in our persistence xml
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDatabaseAccess");
 		GameDao gameDao = new GameDao(emf);
-		Game game = new Game(2, "Mario Cart");
-		Game managedGame = gameDao.merge(game);
-		System.out.println(managedGame.getName());
+		Game game = new Game(1, "Mario Cart");
+		gameDao.persist(game);
+		Game game2 = new Game(2, "Mario Cart2");
+		gameDao.persist(game2);
+		List<Game> result = gameDao.findAll();
+		result.forEach(x -> {
+			System.out.println(x.getName());
+		});
+		
 		emf.close();
 		
 	}
