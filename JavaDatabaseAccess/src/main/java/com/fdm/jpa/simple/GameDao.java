@@ -67,4 +67,17 @@ public class GameDao {
 		et.commit();
 		em.close();
 	}
+	
+	public Game merge(Game pojoGame) {
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		Game managedGame;
+		et.begin();
+		{
+			managedGame = em.merge(pojoGame);
+		}
+		et.commit();
+		em.close();
+		return managedGame;
+	}
 }
