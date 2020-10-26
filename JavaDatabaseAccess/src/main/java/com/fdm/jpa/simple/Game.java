@@ -1,12 +1,17 @@
 package com.fdm.jpa.simple;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="MY_GAMES")
 public class Game {
 	@Id
+	@Column(name = "GAME_ID")
 	private int id;
+	@Column(name = "GAME_NAME", nullable=false, unique=true)
 	private String name;
 
 	// you need the default constructor and the getters and setters
