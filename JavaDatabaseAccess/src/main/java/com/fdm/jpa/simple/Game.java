@@ -2,6 +2,8 @@ package com.fdm.jpa.simple;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -12,7 +14,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MY_GAMES")
 public class Game {
+	//we are now generating the id so we do not need to pass it in to the constructor
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "GAME_ID")
 	private int id;
 	@Column(name = "GAME_NAME", nullable = false, unique = true)
@@ -28,9 +32,8 @@ public class Game {
 	// this constructor)
 	// but for us making objects like this is easier
 
-	public Game(int id, String name) {
+	public Game(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 

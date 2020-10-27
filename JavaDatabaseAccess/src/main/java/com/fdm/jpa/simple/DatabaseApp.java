@@ -13,9 +13,9 @@ public class DatabaseApp {
 		//this refers to the name of the persistence-unit in our persistence xml
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDatabaseAccess");
 		GameDao gameDao = new GameDao(emf);
-		Game game = new Game(1, "Mario Cart");
+		Game game = new Game("Mario Cart");
 		gameDao.persist(game);
-		Game game2 = new Game(2, "Mario Cart2");
+		Game game2 = new Game("Mario Cart2");
 		gameDao.persist(game2);
 		System.out.println("foundGame = " + gameDao.findByTitle("Mario Cart2"));
 		

@@ -34,7 +34,7 @@ public class GameDaoTest {
 	@Test
 	public void check_if_game_is_persisted_to_database() {
 		//Arrange
-		Game game = new Game(1,"testgame");
+		Game game = new Game("testgame");
 		//Act 
 		gameDao.persist(game);
 		//Assert
