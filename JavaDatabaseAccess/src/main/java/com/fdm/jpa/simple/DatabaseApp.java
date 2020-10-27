@@ -17,7 +17,7 @@ public class DatabaseApp {
 		gameDao.persist(game);
 		Game game2 = new Game(2, "Mario Cart2");
 		gameDao.persist(game2);
-		System.out.println("foundGame = " + gameDao.findByName("Mario Cart2"));
+		System.out.println("foundGame = " + gameDao.findByTitle("Mario Cart2"));
 		
 		emf.close();
 		

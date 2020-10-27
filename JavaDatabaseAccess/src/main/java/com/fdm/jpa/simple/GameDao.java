@@ -109,4 +109,14 @@ public class GameDao {
 		em.close();
 		return foundGame;	
 	}
+	//this is using static queries
+	public Game findByTitle(String title) {
+		EntityManager em = emf.createEntityManager();
+		TypedQuery<Game> typedQuery = em.createNamedQuery("findGameByName",Game.class);
+		typedQuery.setParameter("gameName", title);
+		List<Game> foundGames = typedQuery.getResultList();
+		Game foundGame = foundGames.isEmpty()? null : foundGames.get(0);
+		em.close();
+		return foundGame;
+	}
 }

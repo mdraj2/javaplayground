@@ -3,15 +3,19 @@ package com.fdm.jpa.simple;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+@NamedQueries(value = {
+		@NamedQuery(name = "findGameByName", query = "SELECT g FROM Game g WHERE g.name LIKE :gameName") })
 @Entity
-@Table(name="MY_GAMES")
+@Table(name = "MY_GAMES")
 public class Game {
 	@Id
 	@Column(name = "GAME_ID")
 	private int id;
-	@Column(name = "GAME_NAME", nullable=false, unique=true)
+	@Column(name = "GAME_NAME", nullable = false, unique = true)
 	private String name;
 
 	// you need the default constructor and the getters and setters
@@ -50,7 +54,5 @@ public class Game {
 	public String toString() {
 		return "Game [id=" + id + ", name=" + name + "]";
 	}
-	
-	
 
 }
