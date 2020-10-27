@@ -46,4 +46,11 @@ public class Game {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Game [id=" + id + ", name=" + name + "]";
+	}
+	
+	
+
 }

@@ -95,4 +95,18 @@ public class GameDao {
 		return foundGame;
 		
 	}
+	
+	public Game findByName(String name) {
+		EntityManager em = emf.createEntityManager();
+		String queryString = "SELECT g FROM Game g WHERE g.name LIKE :gtitle";
+		TypedQuery<Game> queryResult =em.createQuery(queryString,Game.class);
+		queryResult.setParameter("gtitle", name);
+		//note that it may throw a no results exception if you use getsingleresult
+		//Game foundGame = queryResult.getSingleResult();
+		List<Game> foundGames = queryResult.getResultList();
+		//since name is unique the list will have one game or non.
+		Game foundGame = foundGames.isEmpty() ? null : foundGames.get(0);
+		em.close();
+		return foundGame;	
+	}
 }

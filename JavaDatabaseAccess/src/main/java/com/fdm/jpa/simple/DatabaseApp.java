@@ -17,10 +17,7 @@ public class DatabaseApp {
 		gameDao.persist(game);
 		Game game2 = new Game(2, "Mario Cart2");
 		gameDao.persist(game2);
-		List<Game> result = gameDao.findAll();
-		result.forEach(x -> {
-			System.out.println(x.getName());
-		});
+		System.out.println("foundGame = " + gameDao.findByName("Mario Cart2"));
 		
 		emf.close();
 		
