@@ -21,7 +21,7 @@ public class Store {
 	// persists all associated products
 	@ManyToMany(cascade = CascadeType.ALL)
 	//@JoinTable(name = "STORE_PRODUCT_JOIN", joinColumns = @JoinColumn(name = "STORE_ID_FK"), inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID_FK)"))
-	private List<Product> product = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 
 	public Store() {
 		super();
@@ -49,16 +49,24 @@ public class Store {
 	}
 
 	public List<Product> getProduct() {
-		return product;
+		return products;
 	}
 
 	public void setProduct(List<Product> product) {
-		this.product = product;
+		this.products = product;
 	}
 
 	public void add(Product product) {
-		this.product.add(product);
+		this.products.add(product);
 
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 }

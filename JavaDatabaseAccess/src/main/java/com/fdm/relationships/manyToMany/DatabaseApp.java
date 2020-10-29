@@ -16,9 +16,13 @@ public class DatabaseApp {
 		Product coke = new Product("Coke", 2.49);
 		
 		woolWorths.add(coke);
+		coke.addToStore(woolWorths);
 		woolWorths.add(water);
+		water.addToStore(woolWorths);
 		coles.add(water);
+		water.addToStore(coles);
 		coles.add(pepsi);
+		pepsi.addToStore(coles);
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("JavaDatabaseAccess");
 		EntityManager em = emf.createEntityManager();
